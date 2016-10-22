@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>1-1 控制div属性</title>
+    <script src="vue.js"></script>
+    <style>
+        #div {
+            width: 500px;
+            margin: 0 auto;
+            padding: 0;
+            text-align: center;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div id="div">
+        <button v-on:click="widePlus">变宽</button>
+        <button v-on:click="heightPlus">变高</button>
+        <button v-on:click="colorChange">变色</button>
+        <button v-on:click="hideChange">隐藏</button>
+        <button v-on:click="reDo">重置</button>
+        <div id="div1" v-bind:style="div1Style"></div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#div",
+            data: {
+                div1Style: {
+                    width: '100px',
+                    height: '100px',
+                    background: 'black',
+                    margin: '20px auto',
+                    display:'block'
+                }
+            },
+
+            methods: {
+                widePlus: function() {return this.div1Style.width = '500px'},
+                heightPlus: function() {return this.div1Style.height = '500px'},
+                colorChange:function() {return this.div1Style.background = 'red'},
+                hideChange:function() {return this.div1Style.display = 'none'},
+                reDo:function() {return this.div1Style={
+                    width: '100px',
+                    height: '100px',
+                    background: 'black',
+                    margin: '20px auto',
+                    display:'block'
+                }},
+
+
+            }
+
+
+        })
+    </script>
+
+</body>
+
+</html>
