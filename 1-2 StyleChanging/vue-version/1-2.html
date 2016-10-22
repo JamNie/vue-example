@@ -2,62 +2,162 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>1-1 控制div属性</title>
-    <script src="vue.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>skin</title>
     <style>
-        #div {
+        body,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            font: 12px/1.5 Tahoma;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        a:link,
+        a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #outer {
             width: 500px;
             margin: 0 auto;
-            padding: 0;
-            text-align: center;
+            overflow: hidden;
+            zoom: 1;
         }
+
+        #skin,
+        #nav {
+            overflow: hidden;
+            zoom: 1;
+        }
+
+        #skin {
+            margin: 20px 0;
+            display:block;
+            width: 100px;
+        }
+
+        #skin li {
+            float: left;
+            width: 6px;
+            height: 6px;
+            cursor: pointer;
+            overflow: hidden;
+            margin-right: 10px;
+            text-indent: -9999px;
+            border-width: 4px;
+            border-style: solid;
+        }
+
+
+
+        #red {
+            border-color: red;
+            background: red;
+        }
+
+        #green {
+            border-color: green;
+            background: green;
+        }
+
+        #black {
+            border-color: black;
+            background: black;
+        }
+
+        #nav {
+            border: 1px solid #fff;
+        }
+
+        #nav li {
+            float: left;
+            width: 82px;
+            line-height: 25px;
+            text-align: center;
+            border-right: 1px solid #fff;
+        }
+        #nav li a {
+          color: #fff;
+        }
+        #skin .current {background: #fff;}
     </style>
-
-
+    <link href="green.css" rel="stylesheet" type="text/css">
+    <script src="vue.js"></script>
 </head>
 
 <body>
-    <div id="div">
-        <button v-on:click="widePlus">变宽</button>
-        <button v-on:click="heightPlus">变高</button>
-        <button v-on:click="colorChange">变色</button>
-        <button v-on:click="hideChange">隐藏</button>
-        <button v-on:click="reDo">重置</button>
-        <div id="div1" v-bind:style="div1Style"></div>
-    </div>
-    <script>
-        var vm = new Vue({
-            el: "#div",
-            data: {
-                div1Style: {
-                    width: '100px',
-                    height: '100px',
-                    background: 'black',
-                    margin: '20px auto',
-                    display:'block'
-                }
+    <div id="outer">
+        <ul id="skin">
+            <li id="red" v-bind:class="{current:red}" title="红色" v-on:click="redChange">红</li>
+            <li id="green" v-bind:class="{current:green}" title="绿色" v-on:click="greenChange">绿</li>
+            <li id="black" v-bind:class="{current:black}" title="黑色" v-on:click="blackChange">黑</li>
+        </ul>
+        <ul id="nav">
+            <li><a href="javascript:;">新闻</a></li>
+            <li><a href="javascript:;">娱乐</a></li>
+            <li><a href="javascript:;">体育</a></li>
+            <li><a href="javascript:;">电影</a></li>
+            <li><a href="javascript:;">音乐</a></li>
+            <li><a href="javascript:;">旅游</a></l> </ul>
+        <script>
+          var vm = new Vue({
+            el:'#outer',
+            data:{
+              red:false,
+              green:false,
+              black:false,
             },
+            methods:{
+              greenChange:function(){
+                var oLink = document.getElementsByTagName("link")[0];
+                oLink['href'] = 'green' + ".css";
+                this.green=true
+                this.red=false
+                this.black=false
 
-            methods: {
-                widePlus: function() {return this.div1Style.width = '500px'},
-                heightPlus: function() {return this.div1Style.height = '500px'},
-                colorChange:function() {return this.div1Style.background = 'red'},
-                hideChange:function() {return this.div1Style.display = 'none'},
-                reDo:function() {return this.div1Style={
-                    width: '100px',
-                    height: '100px',
-                    background: 'black',
-                    margin: '20px auto',
-                    display:'block'
-                }},
+              },
 
+              redChange:function(){
+                var oLink = document.getElementsByTagName("link")[0];
+                oLink['href'] = 'red' + ".css";
+                this.green=false
+                this.red=true
+                this.black=false
 
+              },
+
+              blackChange:function(){
+                var oLink = document.getElementsByTagName("link")[0];
+                oLink['href'] = 'black' + ".css";
+                this.green=false
+                this.red=false
+                this.black=true
+              },
             }
 
 
-        })
-    </script>
+
+          })
+        </script>
+
+    </div>
 
 </body>
 
