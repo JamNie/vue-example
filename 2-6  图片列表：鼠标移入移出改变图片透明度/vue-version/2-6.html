@@ -20,7 +20,7 @@
 <body>
 
 	<ul id="imgList">
-		<li><img v-for="src in srcs" v-bind:src="src.src" v-bind:style="imgStyle" /></li>
+		<li><img v-for="src in srcs" v-bind:src="src.src" v-bind:style="imgStyleA" v-on:mousemove="moveChange" v-on:mouseout="outChange"/></li>
 	</ul>
 
 
@@ -28,6 +28,7 @@
 		new Vue({
 			el: '#imgList',
 			data: {
+				isA:true,
 				srcs:[
 					{src:'img/1.jpg'},
 					{src:'img/2.jpg'},
@@ -40,9 +41,25 @@
 					{src:'img/9.jpg'},
 					{src:'img/10.jpg'},
 				],
-				imgStyle: {
+				imgStyleA: {
 					float: 'left',
 					opacity: '0.5',
+				},
+				imgStyleB:{
+					float: 'left',
+					opacity: '1',
+				}
+
+			},
+			methods:{
+
+				moveChange:function(){
+
+
+				  this.imgStyleA.opacity=1
+				},
+				outChange:function(){
+					this.imgStyleA.opacity=0.5
 				}
 
 			}
