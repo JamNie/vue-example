@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="vue.js"></script>
+    <style media="screen">
+        body,
+        input,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: 12px/1.5 Tahoma;
+        }
+
+        #outer {
+            width: 200px;
+            margin: 10px auto;
+        }
+
+        input {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <label v-on:mousemove="showHint" v-on:mouseout="hideHint"><input type="checkbox" />两周内自动登陆</label>
+        <div id="tips" v-bind:style="divStyle">为了您的信息安全，请不要在网吧或公用电脑上使用此功能！</div>
+
+    <script>
+    var vm = new Vue({
+        el: "#outer",
+        data: {
+            divStyle: {
+                border:"1px solid #f90",
+                background: '#ffefa4',
+                "margin-top": '5px',
+                display:'none',
+                padding:'5px'
+            }
+        },
+        methods: {
+
+
+            showHint:function() {return this.divStyle.display = 'block'},
+            hideHint:function() {return this.divStyle.display = 'none'},
+
+        }
+    })
+    </script>
+</body>
+
+</html>
