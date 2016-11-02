@@ -6,42 +6,48 @@
 	<title>hover example</title>
 	<script src='vue.js'></script>
 	<style>
-		ul,
-		li {
-			margin: 0;
-			padding: 0;
-		  list-style-type: none
-		}
-		#imgList{width:700px;overflow:auto;border:1px none ;margin:0 auto;padding:0 0 10px 10px;}
+	ul,li{margin:0;padding:0;list-style-type:none;}
+	#imgList{width:700px;overflow:hidden;zoom:1;border:1px solid #333;margin:0 auto;padding:0 0 10px 10px;}
+	#imgList li{float:left;width:128px;height:128px;border:1px solid #ccc;margin:10px 10px 0 0;}
+
 
 	</style>
 </head>
 
 <body>
-
 	<ul id="imgList">
-		<li><img v-for="src in srcs" v-bind:src="src.src" v-bind:style="imgStyleA" v-on:mousemove="moveChange" v-on:mouseout="outChange"/></li>
+		<img-component src="img/1.jpg"></img-component>
+		<img-component src="img/2.jpg"></img-component>
+		<img-component src="img/3.jpg"></img-component>
+		<img-component src="img/4.jpg"></img-component>
+		<img-component src="img/5.jpg"></img-component>
+		<img-component src="img/6.jpg"></img-component>
+		<img-component src="img/7.jpg"></img-component>
+		<img-component src="img/8.jpg"></img-component>
+		<img-component src="img/9.jpg"></img-component>
+		<img-component src="img/10.jpg"></img-component>
+
+
 	</ul>
 
 
 	<script>
-		new Vue({
-			el: '#imgList',
-			data: {
-				isA:true,
-				srcs:[
-					{src:'img/1.jpg'},
-					{src:'img/2.jpg'},
-					{src:'img/3.jpg'},
-					{src:'img/4.jpg'},
-					{src:'img/5.jpg'},
-					{src:'img/6.jpg'},
-					{src:'img/7.jpg'},
-					{src:'img/8.jpg'},
-					{src:'img/9.jpg'},
-					{src:'img/10.jpg'},
-				],
-				imgStyleA: {
+
+		Vue.component('img-component', {
+			props: ['src'],
+			template: '<li><img v-bind:src="src" v-bind:style="imgStyleA" v-on:mousemove="moveChange" v-on:mouseout="outChange"/></li>',
+			methods:{
+				moveChange:function(){
+				  this.imgStyleA.opacity=1
+				},
+				outChange:function(){
+					this.imgStyleA.opacity=0.5
+				}
+
+			},
+			data:function(){
+				return {
+					imgStyleA: {
 					float: 'left',
 					opacity: '0.5',
 				},
@@ -49,20 +55,15 @@
 					float: 'left',
 					opacity: '1',
 				}
-
-			},
-			methods:{
-
-				moveChange:function(){
-
-
-				  this.imgStyleA.opacity=1
-				},
-				outChange:function(){
-					this.imgStyleA.opacity=0.5
 				}
+			},
 
-			}
+
+
+
+		})
+		new Vue({
+			el: '#imgList'
 		})
 	</script>
 </body>
