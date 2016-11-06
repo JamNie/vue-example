@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js"></script>
+		<style>
+		body,ul,li,button{margin:0;padding:0;}
+		body{font:12px/1.5 Tahoma;}
+		ul{list-style-type:none;}
+		ul,button{cursor:pointer;}
+	  #div {width:70px;margin:10px auto;}
+		#close {border-top:1px solid #9a99ff;color:#00c}
+		</style>
+
+	</head>
+	<body>
+		<div id="div">
+			<button v-on:click="showHint">Inputer</button>
+			<ul id="ul" v-bind:style="ulStyle">
+				<li-com message="Handwriting">handwriting</li-com>
+				<li-com message="Pinyin">Pinyin</li-com>
+				<li id="close" v-on:click="showHint"><a>close</a></li>
+			</ul>
+
+
+		</div>
+		<script>
+		Vue.component("li-com",{
+			props:['message'],
+			template:'<li><a v-on:mousemove="changeBackground" v-on:mouseleave="disableColor" v-bind:style="aBackground" v-bind:message="message">{{message}}</a></li> ',
+			data:function(){
+				return {
+					aBackground:{
+						background:"#fff",
+						color:'#00c'
+					},
+				}
+			},
+			methods:{
+				changeBackground:function(){
+					this.aBackground.background="#d9e1f6"
+				},
+				disableColor:function(){
+					this.aBackground.background="#fff"
+				}
+
+			},
+
+		})
+
+		new Vue({
+			el:"#div",
+			data:{
+				ulStyle:{
+					"margin-top":'5px',
+					border:'1px solid #9a99ff',
+					background:'#fff',
+					display:"block"
+				},
+			},
+			methods:{
+
+				showHint:function(){
+					return this.ulStyle.display= this.ulStyle.display=== "block"?"none":"block"
+				},
+			}
+
+		})
+		</script>
+
+	</body>
+</html>
