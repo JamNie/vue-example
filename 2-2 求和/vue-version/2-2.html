@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="vue.js"></script>
+    <style>
+    body{color:#999;font:12px/1.5 Tahoma;}
+    #outer{width:500px;margin:0 auto;}
+    #outer input{padding:3px;border:1px solid #ccc;font-family:inherit;width:220px;margin-right:10px;}
+    .result{font:30px Tahoma ;color:red;}
+    </style>
+  </head>
+  <body>
+    <div id="outer">
+        <label><input type="text" v-model='inputNum' v-on:keyup="testFunc"/><span>输入数字求和，数字之间用半角","号分隔</span></label>
+        <p><button v-on:click="sumFunc">求和</button></p>
+        <div class="result">
+          {{result}}
+        </div>
+    </div>
+    <script>
+    new Vue({
+      el:"#outer",
+
+      data:{
+        result:0,
+        inputNum:"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15",
+      },
+      methods:{
+        testFunc:function(){
+          this.inputNum=this.inputNum.replace(/[^(\d)|(,)]/,"")
+        },
+        sumFunc:function(){
+          this.result=0
+          var oInput=this.inputNum.split(",")
+          for(var i in oInput)
+          {
+
+            this.result+= parseInt(oInput[i])
+          }
+
+        }
+      }
+    })
+
+    </script>
+  </body>
+</html>
