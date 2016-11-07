@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="vue.js"></script>
+    <style media="screen">
+        body,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            color: #333;
+            font: 12px/1.5 Tahoma;
+            padding-top: 10px;
+        }
+
+        #outer {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-right: 5px;
+        }
+
+        label {
+            width: 5em;
+            display: inline-block;
+            text-align: right;
+        }
+
+        input {
+            padding: 3px;
+            font-family: inherit;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <p><label>属性名：</label><input type="text" v-model="nameDiv" /></p>
+        <p><label>属性值：</label><input type="text" v-model="valueDiv" /></p>
+        <p>
+            <label></label><button v-on:click="changeStyle">确定</button>
+            <button v-on:click="cancelStyle">重置</button>
+        </p>
+        <div id="div1" v-bind:style="div1Style">在上方输入框输入"属性名"及"属性值"，点击确定按钮查看效果。</div>
+    </div>
+    <script>
+        new Vue({
+            el: "#outer",
+            data: {
+                div1Style: {
+                    width: '180px',
+                    height: '180px',
+                    background: 'blue',
+                    margin: '100px auto',
+                    padding: '10px',
+                    color: '#fff'
+                },
+                nameDiv: 'background',
+                valueDiv: 'blue',
+
+
+            },
+            methods: {
+                changeStyle: function() {
+                    switch (this.nameDiv) {
+                        case 'width':
+                            this.div1Style.width = this.valueDiv
+                            break;
+                        case 'height':
+                            this.div1Style.height = this.valueDiv
+                            break;
+                        case 'background':
+                            this.div1Style.background = this.valueDiv
+                            break;
+                        case 'margin':
+                            this.div1Style.margin = this.valueDiv
+                            break;
+                        case 'padding':
+                            this.div1Style.padding = this.valueDiv
+                            break;
+
+                        case 'color':
+                            this.div1Style.color = this.valueDiv
+                            break;
+
+
+
+
+
+
+                    }
+                },
+                cancelStyle: function() {
+                    this.div1Style = {
+                        width: '180px',
+                        height: '180px',
+                        background: 'blue',
+                        margin: '100px auto',
+                        padding: '10px',
+                        color: '#fff'
+                    }
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
