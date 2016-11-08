@@ -23,14 +23,14 @@
 <body>
     <div id="outer">
         <ul id="tab">
-            <li class='ventor' v-for="(vendor, $index) in vendors" @click="changeIndex($index)" v-bind:class="{active: activeIndex == $index}">
-                <span>{{vendor.name}}</span>
+            <li class='ventor' v-for="(vendor, $index) in vendors" @mousemove="changeIndex($index)" v-bind:class="{active: activeIndex == $index}">
+                {{vendor.name}}
             </li>
         </ul>
         <div id="content">
-            <ul id="table" v-for="(items, $index) in books" v-show="$index==activeIndex">
-                <li v-for="(item, $index) in items">
-                    <span class="index">{{item}}</span>
+            <ul id="table" v-for="(books, $index) in books" v-show="$index==activeIndex">
+                <li v-for="(book, $index) in books">
+                    {{book}}
                 </li>
             </ul>
         </div>
@@ -65,5 +65,4 @@
         });
     </script>
 </body>
-
 </html>
