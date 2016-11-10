@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>简易JS年历</title>
+    <script src='vue.js'></script>
+    <style>
+    body,ul,li,h2,p{margin:0;padding:0;}
+    body{font:12px/1.5 Tahoma;}
+#calendar {width:248px;overflow:hidden;background:#eaeaea;margin:10px auto;padding:0 0 10px 10px;}
+#calendar ul {overflow:hidden;}
+.mon {color:#fff;float:left;width:40px;height:40px;cursor:pointer;font-size:14px;text-align:center;background:#424242;line-height:1.3;list-style-type:none;border:1px solid #424242;margin:10px 10px 0 0;padding:5px;}
+
+.active,.mon:hover{color:#F69;background:#fff;}
+#calendar li strong{display:block;font-size:18px;}
+#msg{color:#666;background:#f1f1f1;border:1px solid #fff;margin:10px 10px 0 0;padding:5px;}
+#msg h2{font-size:14px;}
+    </style>
+
+</head>
+
+<body>
+    <div id="calendar">
+        <ul>
+            <li class='mon' v-for="(month,$index) in months" @mousemove="changeIndex($index)" v-bind:class="{active:activeIndex==$index}"><strong>{{month.num}}</strong>{{month.name}}</li>
+
+        </ul>
+        <div id="msg">
+            <h2 >
+            <strong>{{activeIndex+1}}</strong>
+            月节日
+        </h2>
+            <p v-for="(holiday,$index) in holidays" v-show="$index==activeIndex">{{holiday}}</p>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: "#calendar",
+            data: {
+                activeIndex: 5,
+                months: [{
+                    num: 1,
+                    name: 'JAN'
+                }, {
+                    num: 2,
+                    name: 'FER'
+                }, {
+                    num: 3,
+                    name: 'MAR'
+                }, {
+                    num: 4,
+                    name: 'APR'
+                }, {
+                    num: 5,
+                    name: 'MAY'
+                }, {
+                    num: 6,
+                    name: 'JUN'
+                }, {
+                    num: 7,
+                    name: 'JUL'
+                }, {
+                    num: 8,
+                    name: 'AUG'
+                }, {
+                    num: 9,
+                    name: 'SEP'
+                }, {
+                    num: 10,
+                    name: 'OCT'
+                }, {
+                    num: 11,
+                    name: 'NOV'
+                }, {
+                    num: 12,
+                    name: 'DEC'
+                }],
+                holidays: [
+                    "元旦：1月1日至3日放假三天。",
+                    "春节：2月2日至8日放假7天。",
+                    "妇女节：3月8日妇女节，与我无关。",
+                    "清明节：4月3日至5日放假3天。",
+                    "劳动节：4月30日至5月2日放假3天。",
+                    "端午节：6月4日至6日放假3天。",
+                    "小暑：7月7日小暑。不放假。",
+                    "七夕节：8月6日七夕节。不放假。",
+                    "中秋节：9月10日至12日放假3天。",
+                    "国庆节：10月1日至7日放假7天。",
+                    "立冬：11月8日立冬。不放假。",
+                    "艾滋病日:12月1日",
+
+                ],
+
+
+
+            },
+            methods:{
+              changeIndex:function(item){
+                this.activeIndex = item
+              }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
