@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>提示框效果</title>
+<style>
+body,div,h2,ul,li{margin:0;padding:0;}
+body{font:12px/1.5 Tahoma;}
+ul{list-style-type:none;}
+#outer{width:560px;border:1px solid #333;margin:10px auto;padding:0 0 10px 10px;}
+#outer h2{line-height:30px;text-align:center;margin-top:10px;}
+#outer ul:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+#outer ul li{position:relative;float:left;border:1px solid #333;margin:10px 10px 0 0;display:inline;}
+#outer ul li img{position:absolute;top:-14px;left:-14px;display:block;border:2px solid #999;cursor:crosshair;}
+#outer ul li a{color:#666;width:80px;height:80px;display:block;background:#f0f0f0;text-decoration:none;padding:10px;}
+#outer ul li a strong{display:block;}
+.zindex{z-index:1;}
+</style>
+<script src="vue.js"></script>
+</head>
+<body>
+<div id="outer">
+    <h2>名车车标展示-鼠标移过显示车标</h2>
+    <ul>
+        <li @mousemove="changeIndex($index)" @mouseout="cancelShow" v-for="(car,$index) in cars">
+            <a href="javascript:;"><strong>{{car.name}}</strong>{{car.cname}}</a>
+            <img v-bind:src="car.src" v-show="$index==activeIndex"/>
+        </li>
+
+    </ul>
+</div>
+<script>
+  new Vue({
+    el:'#outer',
+    data:{
+      activeIndex: 100,
+      cars:[
+        {name:'BMW',cname:"宝马汽车",src:"img/1.jpg"},
+        {name:'Alfa Romeo',cname:"阿尔法-罗米欧",src:"img/2.jpg"},
+        {name:'Skoda',cname:"斯柯达",src:"img/3.jpg"},
+        {name:'Volkswagen',cname:"大众汽车",src:"img/4.jpg"},
+        {name:'Saab ',cname:"萨布牌轿",src:"img/5.jpg"},
+        {name:'Lamborghini',cname:" 兰博基尼",src:"img/6.jpg"},
+        {name:'Porsche',cname:"保时捷",src:"img/7.jpg"},
+        {name:'Peugeot',cname:" 标致",src:"img/8.jpg"},
+        {name:'Mercedes1',cname:" 梅赛德斯 奔驰",src:"img/9.jpg"},
+        {name:'Buick ',cname:"别克汽车",src:"img/10.jpg"},
+
+
+      ],
+
+    },
+    methods:{
+      changeIndex:function(item){
+        this.activeIndex=item
+      },
+      cancelShow:function(){
+        this.activeIndex=100
+      }
+    }
+  })
+</script>
+</body>
+</html>
